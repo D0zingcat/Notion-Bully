@@ -165,6 +165,7 @@ func (n *NotionJob) SubmitTransaction(ul string, userId, timezone, firstname, la
 	log.Println(string(dump))
 	// submit this user has been registered
 	go func() {
+		time.Sleep(time.Duration(10) * time.Second)
 		req, _ = http.NewRequest(`POST`, ul, strings.NewReader(fmt.Sprintf(`{"operations":[{"id":"%s","table":"notion_user","path":[],"command":"update","args":{"onboarding_completed":true}}]}`,
 			userId)))
 		req.Header.Set(`origin`, `https://www.notion.so`)

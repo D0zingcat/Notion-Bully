@@ -4,6 +4,7 @@ import (
 	"flag"
 	"github.com/BurntSushi/toml"
 	"log"
+	"math/rand"
 	"notion-bully/config"
 	"notion-bully/mail"
 	"notion-bully/notion"
@@ -57,7 +58,8 @@ func main() {
 				util.GetOneRandom(c.FirstNames).(string), util.GetOneRandom(c.LastNames).(string),
 				util.GetOneRandom(c.Notion.Src).(string), util.GetOneRandom(c.Notion.Job).(string), util.GetOneRandom(c.Notion.Scope).(string))
 			n.ActivateRefer(c.Notion.Host + c.Notion.Endpoints.ActivateRefer)
-			time.Sleep(time.Duration(100) * time.Second)
+			r := rand.New(rand.NewSource(time.Now().UnixNano()))
+			time.Sleep(time.Duration(r.Intn(100)) * time.Second)
 		}
 	}
 }
